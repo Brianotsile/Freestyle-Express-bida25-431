@@ -1,15 +1,99 @@
 <!DOCTYPE html>
-<html>
-  <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-   <title>Freestyle Express - Shopping cart Codehal</title>
-   <link rel="stylesheet" href="styles.css">
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Cart - Freestyles Express</title>
 
-   
-    </head>
-  <body>
+<style>
+body{
+  font-family: Arial;
+  background:#f1f3f6;
+  margin:0;
+}
+
+.container{
+  max-width:900px;
+  margin:auto;
+  padding:20px;
+}
+
+.cart{
+  background:white;
+  padding:20px;
+  border-radius:8px;
+  box-shadow:0 2px 10px rgba(0,0,0,0.1);
+}
+
+.cart-item{
+  display:flex;
+  justify-content:space-between;
+  padding:10px 0;
+  border-bottom:1px solid #eee;
+}
+
+button{
+  background:red;
+  color:white;
+  border:none;
+  padding:5px 10px;
+  cursor:pointer;
+  border-radius:5px;
+}
+</style>
+</head>
+
+<body>
+
+<div class="container">
+
+  <h1>Your Cart</h1>
+
+  <div class="cart">
+    <div id="cartItems"></div>
+    <h3>Total: P<span id="total">0</span></h3>
+    <span class="quantity">0</span>
   </div>
-  </body>
-</html>
+  
+<script>
+let cart = JSON.parse(localStorage.getItem("cart")) || [];
 
+let cartItemsContainer = document.getElementById("cartItems");
+let totalElement = document.getElementById("total");
+let quantityElement = document.querySelector(".quantity");
+
+function renderCart(){
+
+  cartItemsContainer.innerHTML = "";
+
+  if(cart.length === 0){
+    cartItemsContainer.innerHTML = "<p>Your cart is empty</p>";
+    totalElement.innerText = 0;
+    if(quantityElement) quantityElement.innerText = 0;
+    return;
+  }
+
+  let total = 0;
+  let totalQty = 0;
+
+  cart.forEach(item => {
+    total += item.price * item.quantity;
+    totalQty += item.quantity;
+
+    cartItemsContainer.innerHTML += `
+      <div class="cart-item">
+        <span>${item.name} x ${item.quantity}</span>
+        <div>P${item.price * item.quantity}</div>
+      </div>
+    `;
+  });
+
+  totalElement.innerText = total;
+  if(quantityElement) quantityElement.innerText = totalQty;
+}
+
+renderCart();
+</script>
+
+</body>
+</html>
