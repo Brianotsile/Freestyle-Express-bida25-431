@@ -1,4 +1,3 @@
-// Get cart from localStorage
 let cart = JSON.parse(localStorage.getItem("cart")) || [];
 
 let cartItemsContainer = document.getElementById("cart-items");
@@ -6,7 +5,7 @@ let total = 0;
 
 function displayCart() {
     cartItemsContainer.innerHTML = "";
-    let total = 0; // reset each time
+    let total = 0; 
 
     cart.forEach((item, index) => {
         total += item.price;

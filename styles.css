@@ -6,9 +6,14 @@
   box-sizing:border-box;
   font-family:'Outfit', sans-serif;
 }
+body {
+  margin: 0;
+  padding: 0;
+}
 
-body{
-  background:#eaeded;
+.page-background {
+  background: url('https://images.unsplash.com/photo-1512436991641-6745cdb1723f') no-repeat center center/cover;
+  min-height: 100vh;
 }
 
 .header{
@@ -40,7 +45,7 @@ body{
   flex: 1;
   display: flex;
   align-items: center;
-  background: white;
+  background: rgb(102, 96, 96);
   margin: 0 20px;   
   border-radius: 4px;
   overflow: hidden;
@@ -195,25 +200,34 @@ body{
 .contact-container,
 .about-container,
 .login-container{
-  max-width:800px;
-  margin:40px auto;
-  background:rgb(122, 147, 197);
-  padding:30px;
-  border-radius:8px;
-  box-shadow:0 2px 10px rgba(0,0,0,0.1);
-}
+  max-width: 800px;
+  margin: 40px auto;
+  padding: 30px;
+  border-radius: 20px;
 
-.contact-form,
-.form-group{
-  display:flex;
-  flex-direction:column;
-  gap:15px;
+  background: rgba(255, 255, 255, 0.12);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  box-shadow: 0 8px 30px rgba(0, 0, 0, 0.25);
+
+  color: white;
 }
 
 input, textarea{
-  padding:10px;
-  border-radius:5px;
-  border:1px solid #ccc;
+  padding: 12px;
+  border-radius: 10px;
+  border: 1px solid rgba(255,255,255,0.3);
+  background: rgba(255,255,255,0.1);
+  color: white;
+  outline: none;
+  backdrop-filter: blur(5px);
+}
+
+input::placeholder,
+textarea::placeholder{
+  color: rgba(255,255,255,0.7);
 }
 
 footer{
@@ -255,15 +269,80 @@ footer{
 }
 
 .product-card{
-  background:white;
+  background: rgba(255, 255, 255, 0.15);
+  backdrop-filter: blur(10px);
   padding:15px;
   text-align:center;
-  border-radius:8px;
-  box-shadow:0 2px 8px rgba(0,0,0,0.1);
+  border-radius:15px;
+  box-shadow:0 8px 20px rgba(0,0,0,0.2);
+  border:1px solid rgba(255,255,255,0.2);
+  color:white;
 }
 
 .product-card img{
   width:100%;
   height:200px;
   object-fit:contain;
+}
+.about-container ul {
+  margin: 15px 0;
+  padding-left: 20px;
+}
+
+.about-container li {
+  margin-bottom: 8px;
+  line-height: 1.6;
+}
+form{
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+}
+label{
+  font-weight: 500;
+  margin-bottom: 5px;
+  color: rgba(255,255,255,0.9);
+}
+button{
+  padding: 12px;
+  border: none;
+  border-radius: 10px;
+  background: rgba(255, 255, 255, 0.2);
+  color: white;
+  font-weight: 600;
+  cursor: pointer;
+  transition: 0.3s ease;
+  backdrop-filter: blur(10px);
+}
+
+button:hover{
+  background: rgba(255, 255, 255, 0.35);
+  transform: translateY(-2px);
+}
+textarea{
+  min-height: 120px;
+  resize: none;
+}
+.register-text a,
+.forgot-password{
+  color: #ffcda2;
+  text-decoration: none;
+  font-weight: 500;
+}
+
+.register-text a:hover,
+.forgot-password:hover{
+  text-decoration: underline;
+}
+.glass-cart{
+  background: rgba(255, 255, 255, 0.10);
+  backdrop-filter: blur(15px);
+  -webkit-backdrop-filter: blur(15px);
+
+  border: 1px solid rgba(255, 255, 255, 0.25);
+  border-radius: 20px;
+
+  box-shadow: 0 10px 30px rgba(0,0,0,0.35);
+
+  color: white;
 }

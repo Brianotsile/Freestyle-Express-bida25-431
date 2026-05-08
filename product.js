@@ -74,7 +74,7 @@ function addToCart(id){
 
   localStorage.setItem("cart", JSON.stringify(cart));
 
-  updateCart();
+  window.location.href = "cart.html";
 }
 
 function updateCart(){
@@ -108,20 +108,55 @@ function updateCart(){
   if(quantityElement) quantityElement.innerText = totalQty;
 }
 
-updateCart();
+function productClicked(id){
+  addToCart(id);
+}
 
+updateCart();
 
 let productGrid = document.getElementById("productGrid");
 
-if(productGrid){
-  items.forEach(item => {
-    productGrid.innerHTML += `
-      <div class="product-card">
-        <img src="${item.image}">
-        <h4>${item.name}</h4>
-        <p>P${item.price}</p>
-        <button onclick="addToCart(${item.id})">Add to Cart</button>
-      </div>
-    `;
+function displayProducts(productList){
+
+  if(!productGrid) return;
+
+  productGrid.innerHTML = productList.map(item => `
+    <div class="product-card">
+      <img src="${item.image}">
+      <h4>${item.name}</h4>
+      <p>P${item.price}</p>
+      <button class="add-to-cart" data-id="${item.id}">
+        Add to Cart
+      </button>
+    </div>
+  `).join("");
+
+  document.querySelectorAll(".add-to-cart").forEach(button => {
+    button.addEventListener("click", () => {
+      let id = Number(button.dataset.id);
+      addToCart(id);
+    });
   });
+
+  if(productList.length === 0){
+    productGrid.innerHTML = `
+      <h3 style="text-align:center; padding:40px;">
+        No products found 😢
+      </h3>
+    `;
+  }
+}
+let savedSearch = localStorage.getItem("searchQuery");
+
+if(savedSearch){
+  let filtered = items.filter(item =>
+    item.name.toLowerCase().includes(savedSearch.toLowerCase())
+  );
+
+  displayProducts(filtered);
+
+  localStorage.removeItem("searchQuery");
+
+} else {
+  displayProducts(items);
 }
